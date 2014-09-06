@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+	<meta name="format-detection" content="false">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>JoMobileDemo</title>
+	<link rel="stylesheet" href="css/jo-flattery.css" type="text/css">
+	<link rel="stylesheet" href="app.css" type="text/css">
+	<link rel="apple-touch-icon" href="joicon_114.png">
+</head>
+<body onload="App.load();">
+	<!-- load the jo library -->
+	<script src="js/jo-flattery.js"></script>
+	<script type="text/javascript">
+	
+	
+	
+	joCache.set("menu", function() {
+		// some inline data and chaining going on here,
+		// dont be afraid, it'll all make sense later
+		var card = new joCard([
+			new joMenu([
+				{ title: "UI Widgets", id: "widgets" },
+				{ title: "Simple Table View", id: "table" },
+				{ title: "Embedded HTML Browser", id: "html" },
+				{ title: "Popups & Dialogs", id: "popups" },
+				{ title: "CSS Utility Functions", id: "themes" }
+			]).selectEvent.subscribe(function(id) {
+				App.stack.push(joCache.get(id));
+			})
+		]);
+		
+		// hey, you don't have to make messy chained and
+		// inlined code; that's a coding style decision
+		// Jo doesn't pretend it should make for you.
+		card.setTitle("Locostation>Home");
+		
+		// required
+		return card;
+	});
+	
+	App = {
+			load: function() {
+				// loading Jo is required
+				
+				jo.load();
+				
+				// typical card stack, nav and footer
+				this.screen = new joScreen(
+					new joFlexcol([
+						this.nav = new joNavbar(),
+						this.stack = new joStackScroller(),
+						this.toolbar = new joToolbar("This is a toolbar")
+					])
+				);
+				
+				// attach the nav to our stack
+				this.nav.setStack(this.stack);
+
+				// push our menu card
+				this.stack.push(joCache.get("menu"));
+			}
+		};	
+	
+	</script>
+</body>
+</html>
