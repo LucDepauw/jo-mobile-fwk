@@ -140,8 +140,11 @@ joSlider.extend(joControl, {
 		
 		if (v != this.value) {
 			joControl.prototype.setValue.call(this, v);
+			//LDP: fix thumb not redrawn issue see http://www.joapp.com/forums/index.php?p=/discussion/comment/502#Comment_502
 			if (!silent)
-				this.draw();
+				joDefer(function(){
+					this.draw();
+				},this);
 		}
 			
 		return this;
