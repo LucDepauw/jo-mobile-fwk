@@ -78,20 +78,6 @@ function joScript(url, call, context) {
 	}
 }	
 
-/**
- * Make RESTful calls to many JSON services (provided they have some
- *	sort of callback ability). This is a low-level utility function.
- * @param {} url to call
- * @param {} call is a function (supports bind, in which case context is optional)
- * @param {} context (usually `this`, and is optional)
- * @example
- * <pre>
- * 		joREST("http://jsonplaceholder.typicode.com/posts", function(error, url) {
- *			if (error)
- *				console.log("script " + url + " didn't load.");
- *		}, this);
- * </pre>
- */
-joREST = joScript;
+
 
 

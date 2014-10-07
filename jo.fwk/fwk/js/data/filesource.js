@@ -178,4 +178,37 @@ joFile = function(url, call, context, timeout) {
 	}
 };
 
+/**
+ * Make RESTful calls to many JSON services 
+ * A utility method which uses XMLHttpRequest to load json or xml from either a remote server or a local file.
+ *	
+ *	> Note that some browsers and mobile devices will *not* allow you to
+ *	> load from just any URL, and some will restrict use with local files
+ *	> especially (I'm looking at you, FireFox).
+ *	>
+ * @example
+ * <pre>
+ * 	Use
+ *	---
+ *	
+ *	function callSomeJSON(){
+ *		joFile("http://jsonplaceholder.typicode.com/posts", function(data,error) {
+ *			if (error){
+ *				console.log("script didn't load.");
+ *			};
+ *			var result = JSON.parse(data);
+ *			console.log(result[0].title);
+ *			});
+ *	}
+ * </pre>
+ * @constructor	
+ * @param {} url is a well-formed URL, or, in most cases, a relative url to a local file
+ * @param {} call is a function to call when the operation completes
+ * @param {} context is an optional scope for the function to call (i.e. value of `this`). You can also ignore this parameter (or pass in `null` and use `Function.bind(this)` instead.
+ * @param {} timeout is an optional parameter which tells joFile to wait, in seconds, for a response before throwing an error.
+ * @return {Object}
+ */
+joREST = joFile;
+
+
 
